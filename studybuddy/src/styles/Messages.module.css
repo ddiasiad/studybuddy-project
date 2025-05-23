@@ -1,0 +1,376 @@
+/* src/styles/Messages.module.css */
+.messagesContainer {
+    font-family: var(--font-poppins), sans-serif;
+    height: 90vh;
+    display: flex;
+    margin-left: 40px;
+    margin-right: 40px;
+    flex-direction: column;
+}
+
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.messagesWrapper {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    background: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Message List Styles */
+.messageList {
+    width: 40%;
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    background: #f4f4f4;
+}
+
+.messagePreview {
+    display: flex;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    background: #fff;
+}
+
+.messagePreview:hover {
+    background-color: #f9f9f9;
+}
+
+.messagePreview.selected {
+    background-color: #e8eaf6;
+}
+
+.messagePreview.unread {
+    background-color: #f0f7ff;
+}
+
+.avatarContainer {
+    margin-right: 1rem;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.previewContent {
+    flex: 1;
+    min-width: 0; /* Allows text to truncate */
+}
+
+.previewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.previewHeader h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.timestamp {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.previewText {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Chat Window Styles */
+.chatWindow {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.emptyChatState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    text-align: center;
+}
+
+.emptyChatState h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.emptyChatState p {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.chatHeader {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    background: #f9f9f9;
+}
+
+.chatAvatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.chatHeader h3 {
+    margin: 0;
+}
+
+.chatMessages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;  /* 🧩 key for z-index */
+    z-index: 1;
+}
+
+/* Message styling */
+.message {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    max-width: 80%;
+    position: relative;
+    z-index: 1;
+
+}
+
+.messageReceived {
+    align-self: flex-start;
+}
+
+.messageSent {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.messageAvatar {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 10px;
+    flex-shrink: 0;
+    margin-right: 1rem;
+    pointer-events: none;
+}
+
+.messageContent {
+    background: #f0f0f0;
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.messageSent .messageContent {
+    background: #e8eaf6;
+}
+
+/* Message Form */
+.messageForm {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+    align-items: center;
+}
+
+.messageForm input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    font-family: inherit;
+}
+
+.messageForm button {
+    background: #5c6bc0;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.messageForm button:hover {
+    background: #3f51b5;
+}
+
+/* Schedule session styling */
+.scheduleButton {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.scheduleButton:hover {
+    background: #e0e0e0;
+}
+
+.scheduleForm {
+    background: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.scheduleForm h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+}
+
+.formGroup {
+    margin-bottom: 0.75rem;
+}
+
+.formGroup label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formGroup input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+    font-family: inherit;
+}
+
+.sendButton {
+    background: #5c6bc0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 0.75rem;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.sendButton:hover {
+    background: #3f51b5;
+}
+
+/* Session request styling */
+.sessionRequest {
+    background: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto; /* 🔐 allow clicks */
+}
+
+.sessionRequest h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+}
+
+.sessionDetails {
+    margin-bottom: 1rem;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.detail span {
+    font-weight: bold;
+    color: #333;
+}
+
+.sessionActions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.acceptButton, .declineButton {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    pointer-events: auto;
+    z-index: 20;
+    position: relative;
+}
+
+.acceptButton {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.acceptButton:hover {
+    background-color: #a5d6a7;
+}
+
+.declineButton {
+    background-color: #ffcdd2;
+    color: #c62828;
+}
+
+.declineButton:hover {
+    background-color: #ef9a9a;
+}
+
+/* Send icon button */
+.sendIcon {
+    font-size: 24px;
+    line-height: 1;
+}

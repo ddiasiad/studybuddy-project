@@ -1,0 +1,130 @@
+.container {
+    font-family: var(--font-poppins), sans-serif !important;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.filtersContainer {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.filterItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.filterSelect {
+    background-color: transparent;
+    border: none;
+    padding: 2px;
+    font-size: 16px;
+}
+
+.partnersGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .partnersGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .partnersGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .partnersGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.partnerCard {
+    background-color: #808080;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.profilePicWrapper {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #eee;
+  }
+
+.profilePic {
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.partnerName {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.partnerCourses, .partnerAvailability {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.connectButton {
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.connectButton:hover {
+    background-color: #e0e0e0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.paginationButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.activePage {
+    font-weight: bold;
+    text-decoration: underline;
+}

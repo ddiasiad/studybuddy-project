@@ -1,0 +1,162 @@
+/* === Login Page Layout === */
+
+.loginLayout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #dee4f1, #dee4f1);
+}
+
+/* === Left Panel with Logo === */
+.leftPanel {
+  flex: 1;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.logoImage {
+  width: 90%;
+  max-width: 600px;
+  height: auto;
+}
+
+/* === Right Panel with Floating Login Box === */
+.rightPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 2rem;
+}
+
+.floatingBox {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  max-width: 450px;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.floatingBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* === Login Form Title === */
+.auth-form h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* === Login Inputs === */
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 0.4rem;
+  border: none;
+  border-bottom: 2px solid #333;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.auth-form input:focus {
+  border-color: #5c6bc0;
+}
+
+/* === Forgot Password Link === */
+.loginLinks {
+  text-align: right;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.login-links a {
+  font-size: 0.9rem;
+  color: #2341f6;
+  text-decoration: none;
+  font-family: var(--font-poppins), sans-serif !important; /* 🔥 force it */
+  font-weight: 500;
+}
+
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+/* === Submit Button === */
+.auth-form button[type="submit"] {
+  width: 100%;
+  background-color: #5c6bc0;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 1rem;
+}
+
+.auth-form button[type="submit"]:hover {
+  background-color: #3f51b5;
+}
+
+/* === Divider === */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-family: var(--font-poppins), sans-serif;
+  color: #666;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+
+
+/* === Google Login Button === */
+.googleLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+.google-login:hover {
+  background: #f2f2f2;
+}
+
+.google-login svg {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}

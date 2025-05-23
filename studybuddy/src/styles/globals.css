@@ -1,0 +1,433 @@
+/* === Global Reset & Base Styles === */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  overflow: auto;
+}
+
+/* Disable scrolling only on desktop */
+@media (min-width: 1024px) {
+  body {
+    overflow: hidden;
+  }
+}
+
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+  background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+  overflow: auto;
+}
+
+/* === Global Font Headings === */
+h1, h2, .dm-serif {
+  font-family: var(--font-dm-serif), serif;
+}
+
+/* === Shared === */
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.register-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-height: 95vh;
+  overflow-y: auto;
+  max-width: 800px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #dbe4f3, #dbe4f3);
+  padding: 2rem;
+}
+
+.register-box {
+  display: flex;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  width: 100%;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #333;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+/* === STEP 1: Basic Info === */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Label styling shared across steps */
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 0.25rem;
+}
+
+/* Inputs for Step 1 (Underline style) */
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  margin-top: 0.4rem;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  background: transparent;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+  border-color: #5c6bc0;
+}
+
+.form-errors p, li {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0;
+  font-family: Poppins;
+}
+
+
+
+
+/* === Terms and Conditions === */
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 400;
+}
+
+.terms input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  position: relative;
+  top: 0;
+}
+
+.terms label {
+  display: inline;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.terms a {
+  color: #5c6bc0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+
+/* === STEP 2: Study Info (Boxed style) === */
+.box-style input[type="text"],
+.box-style input[type="email"],
+.box-style input[type="password"],
+.box-style select {
+  padding: 17px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: var(--font-poppins), sans-serif;
+  background-color: #f7f7f7;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.box-style input:focus,
+.box-style select:focus {
+  border-color: #5c6bc0;
+}
+
+/* Dropdown styling */
+.box-style select {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+/* === STEP 3: Study Interests === */
+.form-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+/* === Tags (Pills) === */
+.course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.course-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-family: var(--font-poppins), sans-serif;
+  color: #333;
+  gap: 6px;
+}
+
+/* Clean inline "×" button inside tag */
+.tag-remove {
+  all: unset !important;
+  background: none !important;
+  border: none !important;
+  font-size: 0.9rem !important;
+  font-weight: bold;
+  color: #5c6bc0 !important;
+  cursor: pointer;
+  line-height: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  display: inline !important;
+}
+
+.tag-remove:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+
+/* === Course/Interest Input Group === */
+.course-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.course-input-group input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f4f4f4;
+  font-family: inherit;
+}
+
+/* Only applies to the "+" add button */
+.course-input-group > button {
+  background-color: #5c6bc0;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-option {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.5rem;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.checkbox-option input[type="checkbox"] {
+  transform: translateY(1px); /* optional: tiny tweak to align baseline */
+}
+
+
+
+/* === Dynamic Titles / Header === */
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #666;
+  font-family: var(--font-poppins), sans-serif;
+  margin-top: 0.5rem;
+}
+
+
+/* === Buttons === */
+.auth-form button {
+  background-color: #5c6bc0;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 1rem;
+}
+
+.auth-form button:hover {
+  background-color: #3f51b5;
+}
+
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-nav button {
+  width: 100%;
+}
+
+
+/* === STEP 4: Photo Upload === */
+.photo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+
+.photo-icon-wrapper {
+  width: 250px;
+  height: 250px;
+  background: #eee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  overflow: hidden;
+}
+
+.photo-icon-wrapper:hover {
+  background: #e0e0e0;
+}
+
+.profile-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-link {
+  font-size: 1rem;
+  text-decoration: underline;
+  color: #5c6bc0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+
+.upload-link:hover {
+  opacity: 0.7;
+}
+
+
+
+
+
+
+/* === Step Progress Dots === */
+.step-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc;
+  transition: background 0.3s ease;
+}
+
+.dot.active {
+  background: #5c6bc0;
+}
+
+
+
+
+
+
+

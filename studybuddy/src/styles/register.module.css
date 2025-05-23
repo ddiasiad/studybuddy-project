@@ -1,0 +1,44 @@
+.registerLayout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fa;
+}
+
+.leftPanel {
+    flex: 1;
+    background: linear-gradient(to bottom right, #dbe4f3, #dbe4f3);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.rightPanel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    background: white;
+}
+
+.logoImage {
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+}
+
+@media (min-width: 1024px) {
+    .logoImage {
+        max-width: 500px;
+    }
+}
+
+

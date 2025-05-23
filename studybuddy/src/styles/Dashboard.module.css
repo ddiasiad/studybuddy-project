@@ -1,0 +1,364 @@
+
+
+.dashboardContainer {
+    font-family: var(--font-poppins), sans-serif;
+    max-width: 1300px;
+    margin: 0 auto;
+    color: #333;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+
+
+/* Stats Container */
+.statsContainer {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.statBox {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 1rem;
+    text-align: center;
+    border: 4px solid #5c6bc0;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.statBox p {
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.statBox span {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Main content areas */
+.studySection {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.studyTogether {
+    flex: 2;
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.studyTogether h2 {
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    font-family: Poppins;
+}
+
+.studyTogether p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+/* Buddy cards carousel */
+.buddyCardsContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carouselNavigation {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.rightNav {
+    left: auto;
+    right: -20px;
+}
+
+.navButton {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    /*border-radius: 0%;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    padding-bottom: 5px;
+}
+
+.buddyCards {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.buddyCard {
+    background: #666;
+    color: white;
+    padding: 1.25rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Add a simple silhouette to the avatar */
+.avatar::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='20' fill='%23bbb'/%3E%3Cpath d='M25,85 Q50,60 75,85' fill='%23bbb'/%3E%3Cellipse cx='50' cy='85' rx='25' ry='10' fill='%23bbb'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+}
+
+.buddyCard h3 {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.buddyCourses {
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+    /*color: rgba(255, 255, 255, 0.85);*/
+    color: white !important;
+}
+
+.buddyAvailability {
+    font-size: 0.8rem;
+    margin: 0.25rem 0;
+    color: white !important;
+}
+
+.connectBtn {
+    background: white;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    margin-top: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Messages section */
+.messages {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.messages h3 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.messageItem {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #e8e8e8;
+    border-radius: 8px;
+    align-items: flex-start;
+}
+
+.messageIcon {
+    width: 40px;
+    height: 40px;
+    background: #aaa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.messageContent {
+    flex: 1;
+}
+
+.messageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.messageSender {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.timestamp {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.messageText {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Bottom section */
+.bottomSection {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Courses section */
+.courses {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.courses h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.courseList {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.courseItem {
+    background: #555;
+    color: white;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.courseTitle {
+    font-size: 0.9rem;
+}
+
+.buddyCount {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.viewAllBtn {
+    background: #ddd;
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 1.2rem;
+    margin-top: 0.75rem;
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.viewAllBtn:hover{
+
+}
+
+.linkInsideButton {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Make it inherit the button's text color */
+}
+
+.linkInsideButton:hover{
+    text-decoration: none; /* Remove underline */
+    color: blue /* Make it inherit the button's text color */
+}
+
+
+
+
+
+/* Sessions section */
+.sessions {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.sessions h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.noSessions {
+    padding: 1.5rem;
+    text-align: center;
+    background: #e6e6e6;
+    border-radius: 6px;
+    margin: 1rem 0;
+    color: #666;
+}
+
+.scheduleBtn {
+    background: #ddd;
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 1.2rem;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .studySection, .bottomSection {
+        flex-direction: column;
+    }
+
+    .studyTogether, .messages, .courses, .sessions {
+        width: 100%;
+    }
+
+    .buddyCards {
+        flex-direction: column;
+    }
+}
+
