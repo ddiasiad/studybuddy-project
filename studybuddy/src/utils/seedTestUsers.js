@@ -1,10 +1,12 @@
 // Script to seed test users into MongoDB for presentation/demo
 // Usage: node src/utils/seedTestUsers.js
 
+require('dotenv').config();
+
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/studybuddy';
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 async function seed() {
