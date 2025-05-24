@@ -1,7 +1,7 @@
 // Script to seed test users into MongoDB for presentation/demo
 // Usage: node src/utils/seedTestUsers.js
 
-require('dotenv').config();
+require('dotenv').config({ path: '.env.local' });
 
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
