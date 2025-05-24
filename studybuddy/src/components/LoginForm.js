@@ -28,8 +28,8 @@ export default function LoginForm() {
             localStorage.setItem('token', data.token) // ✅ Save token
             alert('Login successful!')
     
-            // Optional: redirect to profile flow or dashboard
-            window.location.href = '/register' // or `/dashboard` or wherever you want
+            // Redirect to dashboard after login
+            window.location.href = '/dashboard'
     
         } catch (error) {
             console.error('Login error:', error)

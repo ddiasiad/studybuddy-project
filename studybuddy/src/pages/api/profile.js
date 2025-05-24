@@ -1,5 +1,6 @@
 import clientPromise from '../../lib/mongodb';
 import jwt from 'jsonwebtoken';
+import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
   const token = req.headers.authorization?.split(' ')[1];
@@ -30,11 +31,10 @@ export default async function handler(req, res) {
     } = req.body;
 
     try {
-      await db.collection('profiles').updateOne(
-        { userId },
+      await db.collection('users').updateOne(
+        { _id: new ObjectId(userId) },
         {
           $set: {
-            userId,
             academicYear,
             courses,
             studyPreferences,
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
             updatedAt: new Date(),
           },
         },
-        { upsert: true }
+        { upsert: false }
       );
 
       return res.status(200).json({ message: 'Profile saved successfully' });
@@ -55,13 +55,13 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const profile = await db.collection('profiles').findOne({ userId });
+      const user = await db.collection('users').findOne({ _id: new ObjectId(userId) });
 
-      if (!profile) {
+      if (!user) {
         return res.status(404).json({ message: 'Profile not found' });
       }
 
-      return res.status(200).json(profile);
+      return res.status(200).json(user);
     } catch (err) {
       return res.status(500).json({ message: 'Error retrieving profile' });
     }

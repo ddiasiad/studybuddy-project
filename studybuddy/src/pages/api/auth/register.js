@@ -1,6 +1,4 @@
 import clientPromise from '../../../lib/mongodb';
-
-
 import { hash } from 'bcryptjs';
 
 export default async function handler(req, res) {
@@ -8,13 +6,16 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { fullName, email, password } = req.body;
+  // All fields from the registration form
+  const { fullName, email, password, university, field, year, courses, interests, environment } = req.body;
 
   if (!fullName || !email || !password) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
 
   try {
+    // This uses the connection string in .env.local (MONGODB_URI)
+    // For localhost, ensure .env.local has: mongodb://localhost:27017/studybuddy
     const client = await clientPromise;
     const db = client.db('studybuddy');
 
@@ -26,10 +27,17 @@ export default async function handler(req, res) {
 
     const hashedPassword = await hash(password, 10);
 
+    // Store all registration fields in the user document
     const result = await db.collection('users').insertOne({
       fullName,
       email,
       password: hashedPassword,
+      university: university || '',
+      field: field || '',
+      year: year || '',
+      courses: courses || '',
+      interests: interests || '',
+      environment: environment || '',
       createdAt: new Date(),
     });
 

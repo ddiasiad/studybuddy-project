@@ -21,20 +21,24 @@ export default function Profile() {
         }
 
         getProfile(token)
-            .then((data) => {
+            .then((user) => {
                 setUserData({
-                    name: 'Sarah Williamson', 
-                    university: 'Prague City University', 
-                    year: data.academicYear,
-                    courses: Array.isArray(data.courses) ? data.courses : [],
+                    name: user.fullName || user.name || 'Unknown',
+                    university: user.university || '',
+                    year: user.year || user.academicYear || '',
+                    courses: Array.isArray(user.courses)
+                        ? user.courses
+                        : (user.courses ? user.courses.split(',').map(c => c.trim()) : []),
                     preferences: {
                         environment: {
-                            onCampus: data.studyEnvironment?.includes('On Campus'),
-                            online: data.studyEnvironment?.includes('Online'),
-                            groupSetting: data.studyEnvironment?.includes('Group Setting'),
-                            oneOnOne: data.studyEnvironment?.includes('One-on-One'),
+                            onCampus: user.studyEnvironment?.includes('on-campus') || user.environment?.includes('on-campus') || false,
+                            online: user.studyEnvironment?.includes('online') || user.environment?.includes('online') || false,
+                            groupSetting: user.studyEnvironment?.includes('group-setting') || user.environment?.includes('group-setting') || false,
+                            oneOnOne: user.studyEnvironment?.includes('one-to-one') || user.environment?.includes('one-to-one') || false,
                         },
-                        interests: data.studyInterests
+                        interests: Array.isArray(user.studyInterests)
+                            ? user.studyInterests
+                            : (user.interests ? user.interests.split(',').map(i => i.trim()) : [])
                     }
                 });
             })

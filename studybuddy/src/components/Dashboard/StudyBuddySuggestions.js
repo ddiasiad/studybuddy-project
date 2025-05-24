@@ -1,11 +1,40 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from '@/styles/Dashboard.module.css';
 
 export default function StudyBuddySuggestions() {
-    const buddies = [
-        { name: "Jane W.", courses: "CS101, MATH204", availability: "Mon, Wed PM" },
-        { name: "Arya S.", courses: "CS101, PHYS203", availability: "Tue, Thu AM" },
-        { name: "Lisa G.", courses: "MATH204, HIST101", availability: "Weekends" },
-    ];
+    const [buddies, setBuddies] = useState([]);
+    const router = useRouter();
+
+    useEffect(() => {
+        async function fetchBuddies() {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await fetch('/api/buddies');
+                const data = await res.json();
+                let userId = null;
+                if (token) {
+                    // Decode JWT to get userId (works for unsigned JWTs, for signed use a library)
+                    try {
+                        const payload = JSON.parse(atob(token.split('.')[1]));
+                        userId = payload.userId;
+                    } catch {}
+                }
+                // Exclude current user from suggestions
+                const filtered = (data.buddies || []).filter(buddy => buddy._id !== userId);
+                setBuddies(filtered);
+            } catch (err) {
+                setBuddies([]);
+            }
+        }
+        fetchBuddies();
+    }, []);
+
+    const handleConnect = (buddy) => {
+        // Use _id for navigation if available, fallback to email
+        const id = buddy._id || buddy.email;
+        router.push(`/messages?partnerId=${id}`);
+    };
 
     return (
         <div className={styles.studyTogether}>
@@ -20,13 +49,13 @@ export default function StudyBuddySuggestions() {
                 <div className={styles.buddyCards}>
                     {buddies.map((buddy, i) => (
                         <div key={i} className={styles.buddyCard}>
-                            <div className={styles.avatar}>
-                                {/* User silhouette placeholder */}
-                            </div>
-                            <h3>{buddy.name}</h3>
+                            <div className={styles.avatar}></div>
+                            <h3>{buddy.fullName || buddy.name}</h3>
                             <p className={styles.buddyCourses}>{buddy.courses}</p>
-                            <p className={styles.buddyAvailability}>Available: {buddy.availability}</p>
-                            <button className={styles.connectBtn}>Connect</button>
+                            <p className={styles.buddyAvailability}>Available: {buddy.environment}</p>
+                            <button className={styles.connectBtn} onClick={() => handleConnect(buddy)}>
+                                Connect
+                            </button>
                         </div>
                     ))}
                 </div>

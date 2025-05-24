@@ -20,28 +20,28 @@ export default async function handler(req, res) {
     const client = await clientPromise;
     const db = client.db('studybuddy');
 
-    const myProfile = await db.collection('profiles').findOne({ userId: currentUser.userId.toString() });
+    // Switch to users collection
+    const myProfile = await db.collection('users').findOne({ _id: new ObjectId(currentUser.userId) });
     if (!myProfile) return res.status(404).json({ message: 'Your profile was not found' });
 
-    const allProfiles = await db.collection('profiles').find({
-      userId: { $ne: currentUser.userId }
-    }).toArray();
+    const allProfiles = await db.collection('users').find({ _id: { $ne: new ObjectId(currentUser.userId) } }).toArray();
 
     // Step 1: Score matches
     const rawMatches = allProfiles
       .map(profile => {
-        const sharedCourses = Array.isArray(myProfile.courses) && Array.isArray(profile.courses)
-          ? myProfile.courses.filter(c => profile.courses.includes(c))
-          : [];
+        // courses and availability may be stored as comma-separated strings, so split if needed
+        const myCourses = Array.isArray(myProfile.courses) ? myProfile.courses : (myProfile.courses ? myProfile.courses.split(',').map(c => c.trim()) : []);
+        const theirCourses = Array.isArray(profile.courses) ? profile.courses : (profile.courses ? profile.courses.split(',').map(c => c.trim()) : []);
+        const sharedCourses = myCourses.filter(c => theirCourses.includes(c));
 
-        const sharedAvailability = Array.isArray(myProfile.availability) && Array.isArray(profile.availability)
-          ? myProfile.availability.filter(a => profile.availability.includes(a))
-          : [];
+        const myAvailability = Array.isArray(myProfile.availability) ? myProfile.availability : (myProfile.availability ? myProfile.availability.split(',').map(a => a.trim()) : []);
+        const theirAvailability = Array.isArray(profile.availability) ? profile.availability : (profile.availability ? profile.availability.split(',').map(a => a.trim()) : []);
+        const sharedAvailability = myAvailability.filter(a => theirAvailability.includes(a));
 
         const score = sharedCourses.length * 2 + sharedAvailability.length;
 
         return {
-          userId: profile.userId.toString(),
+          userId: profile._id.toString(),
           sharedCourses,
           sharedAvailability,
           score
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
       .filter(m => m.score > 0)
       .sort((a, b) => b.score - a.score);
 
-      const validIds = rawMatches
+    const validIds = rawMatches
       .map(m => {
         try {
           return new ObjectId(m.userId);
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
       const user = userDocs.find(u => u._id.toString() === match.userId);
       return {
         ...match,
-        fullName: user?.fullName || 'Unknown',
+        fullName: user?.fullName || user?.name || 'Unknown',
         photo: user?.photo || null 
       };
     });
