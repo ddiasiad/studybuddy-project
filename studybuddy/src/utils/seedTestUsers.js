@@ -1,12 +1,10 @@
 // Script to seed test users into MongoDB for presentation/demo
 // Usage: node src/utils/seedTestUsers.js
 
-require('dotenv').config({ path: '.env.local' });
-
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/studybuddy';
 const client = new MongoClient(uri);
 
 async function seed() {
@@ -15,12 +13,11 @@ async function seed() {
     const db = client.db('studybuddy');
     const users = db.collection('users');
 
-    // Test users to insert
-    const testUsers = [
+    // Test users to insert (without hashed passwords yet)
+    const testUsersRaw = [
       {
         fullName: 'Alice Example',
         email: 'alice@example.com',
-        password: await bcrypt.hash('Password123', 10),
         university: 'Demo University',
         field: 'Computer Science',
         year: '1',
@@ -32,7 +29,6 @@ async function seed() {
       {
         fullName: 'Bob Example',
         email: 'bob@example.com',
-        password: await bcrypt.hash('Password123', 10),
         university: 'Sample College',
         field: 'Engineering',
         year: '2',
@@ -44,7 +40,6 @@ async function seed() {
       {
         fullName: 'Charlie Example',
         email: 'charlie@example.com',
-        password: await bcrypt.hash('Password123', 10),
         university: 'Test Institute',
         field: 'Mathematics',
         year: '3',
@@ -53,7 +48,92 @@ async function seed() {
         environment: 'Group-Setting',
         createdAt: new Date(),
       },
+      {
+        fullName: 'Diana Demo',
+        email: 'diana@example.com',
+        university: 'Demo University',
+        field: 'Physics',
+        year: '4',
+        courses: 'Physics,Math',
+        interests: 'Quantum,Astro',
+        environment: 'On-Campus',
+        createdAt: new Date(),
+      },
+      {
+        fullName: 'Ethan Test',
+        email: 'ethan@example.com',
+        university: 'Sample College',
+        field: 'Biology',
+        year: '1',
+        courses: 'Biology,Chemistry',
+        interests: 'Genetics,Ecology',
+        environment: 'Online',
+        createdAt: new Date(),
+      },
+      {
+        fullName: 'Fiona Filter',
+        email: 'fiona@example.com',
+        university: 'Test Institute',
+        field: 'Engineering',
+        year: '2',
+        courses: 'Robotics,Math',
+        interests: 'AI,Robotics',
+        environment: 'Group-Setting',
+        createdAt: new Date(),
+      },
+      {
+        fullName: 'George Group',
+        email: 'george@example.com',
+        university: 'Demo University',
+        field: 'Computer Science',
+        year: '3',
+        courses: 'Math,Programming',
+        interests: 'ML,Programming',
+        environment: 'Group-Setting',
+        createdAt: new Date(),
+      },
+      {
+        fullName: 'Hannah Hybrid',
+        email: 'hannah@example.com',
+        university: 'Sample College',
+        field: 'Physics',
+        year: '4',
+        courses: 'Physics,Math',
+        interests: 'Astro,Quantum',
+        environment: 'Online',
+        createdAt: new Date(),
+      },
+      {
+        fullName: 'Ivan InPerson',
+        email: 'ivan@example.com',
+        university: 'Test Institute',
+        field: 'Mathematics',
+        year: '1',
+        courses: 'Statistics,Algebra',
+        interests: 'Math,Data Science',
+        environment: 'On-Campus',
+        createdAt: new Date(),
+      },
+      {
+        fullName: 'Julia Joiner',
+        email: 'julia@example.com',
+        university: 'Demo University',
+        field: 'Engineering',
+        year: '2',
+        courses: 'Robotics,Physics',
+        interests: 'Robotics,AI',
+        environment: 'Online',
+        createdAt: new Date(),
+      },
     ];
+
+    // Add hashed passwords
+    const testUsers = await Promise.all(
+      testUsersRaw.map(async user => ({
+        ...user,
+        password: await bcrypt.hash('Password123', 10),
+      })),
+    );
 
     // Remove existing test users (by email)
     await users.deleteMany({ email: { $in: testUsers.map(u => u.email) } });

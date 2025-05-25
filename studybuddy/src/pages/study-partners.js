@@ -15,66 +15,55 @@ export default function StudyPartners() {
     const [styleFilter, setStyleFilter] = useState('Any');
 
     useEffect(() => {
-        async function fetchMatches() {
-            const token = localStorage.getItem('token');
-
+        async function fetchPartners() {
             try {
-                const response = await fetch('/api/matches', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
+                const res = await fetch('/api/buddies');
+                const data = await res.json();
+                if (data.buddies) {
+                    // Map users to partner card format
+                    const formatted = data.buddies.map((user, index) => ({
+                        id: user._id,
+                        userId: user._id,
+                        name: user.fullName || user.name || 'Unknown',
+                        photo: user.photo || null,
+                        courses: Array.isArray(user.courses) ? user.courses : (user.courses ? user.courses.split(',').map(c => c.trim()) : []),
+                        availability: user.availability || '',
+                        environment: user.environment || user.studyEnvironment || '',
+                    }));
+                    // Optionally filter out current user
+                    let userId = null;
+                    const token = localStorage.getItem('token');
+                    if (token) {
+                        try {
+                            const payload = JSON.parse(atob(token.split('.')[1]));
+                            userId = payload.userId;
+                        } catch {}
                     }
-                });
-
-                if (!response.ok) {
-                    const text = await response.text();
-                    console.error('Non-JSON response:', text);
-                    throw new Error('Expected JSON, got HTML');
-                }
-
-                const data = await response.json();
-                console.log('✅ Matched partners:', data.matches);
-
-                if (data.matches) {
-                    const formatted = data.matches.map((match, index) => ({
-                        id: index + 1,
-                        userId: match.userId, // ✅ for routing
-                        name: match.fullName,
-                        photo: match.photo,
-                        courses: match.sharedCourses,
-                        availability: match.sharedAvailability.join(', ')
-                      }));
-                      
-
-                    // Apply filters
-                    let filtered = formatted;
-
-                    if (courseFilter !== 'All') {
-                        filtered = filtered.filter(p => p.courses.includes(courseFilter));
-                    }
-
-                    if (availabilityFilter !== 'Any') {
-                        filtered = filtered.filter(p => p.availability.includes(availabilityFilter));
-                    }
-
-                    if (styleFilter !== 'Any') {
-                        filtered = filtered.filter(p => p.style === styleFilter);
-                    }
-
+                    const filtered = formatted.filter(p => p.userId !== userId);
                     setStudyPartners(filtered);
                 }
-
-            } catch (error) {
-                console.error('❌ Fetch error:', error);
+            } catch (err) {
+                setStudyPartners([]);
             }
         }
+        fetchPartners();
+    }, []);
 
-        fetchMatches();
-    }, [courseFilter, availabilityFilter, styleFilter]);
+    // Filtering logic
+    const filteredPartners = studyPartners.filter(partner => {
+        // Course filter
+        const courseMatch = courseFilter === 'All' || partner.courses.includes(courseFilter);
+        // Availability filter (case-insensitive substring match)
+        const availMatch = availabilityFilter === 'Any' || (partner.availability && partner.availability.toLowerCase().includes(availabilityFilter.toLowerCase()));
+        // Style filter (case-insensitive substring match, matches environment field)
+        const styleMatch = styleFilter === 'Any' || (partner.environment && partner.environment.toLowerCase().includes(styleFilter.toLowerCase()));
+        return courseMatch && availMatch && styleMatch;
+    });
 
     const partnersPerPage = 8;
-    const totalPages = Math.ceil(studyPartners.length / partnersPerPage);
+    const totalPages = Math.ceil(filteredPartners.length / partnersPerPage);
 
-    const displayedPartners = studyPartners.slice(
+    const displayedPartners = filteredPartners.slice(
         (currentPage - 1) * partnersPerPage,
         currentPage * partnersPerPage
     );

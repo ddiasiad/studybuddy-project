@@ -9,7 +9,30 @@ export default function ChatWindow({ selectedChat }) {
   const [scheduleTime, setScheduleTime] = useState('');
   const [sentRequest, setSentRequest] = useState(false);
   const [sessionRequest, setSessionRequest] = useState(null);
+  const [partnerName, setPartnerName] = useState('');
   const bottomRef = useRef(null);
+
+  useEffect(() => {
+    // Fetch partner name when selectedChat changes
+    async function fetchPartnerName() {
+      if (!selectedChat?.id) {
+        setPartnerName('');
+        return;
+      }
+      try {
+        const res = await fetch(`/api/buddies?id=${selectedChat.id}`);
+        const data = await res.json();
+        if (data.buddy && (data.buddy.fullName || data.buddy.name)) {
+          setPartnerName(data.buddy.fullName || data.buddy.name);
+        } else {
+          setPartnerName('Study Buddy');
+        }
+      } catch {
+        setPartnerName('Study Buddy');
+      }
+    }
+    fetchPartnerName();
+  }, [selectedChat]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -192,13 +215,11 @@ export default function ChatWindow({ selectedChat }) {
 
   return (
     <div className={styles.chatWindow}>
+      <div className={styles.chatHeader}>
+        <h3>{partnerName}</h3>
+      </div>
       {selectedChat ? (
         <>
-          <div className={styles.chatHeader}>
-            <div className={styles.chatAvatar}></div>
-            <h3>{selectedChat.name || 'Study Buddy'}</h3>
-          </div>
-
           <div className={styles.chatMessages}>
             {messages.map((msg, idx) => {
               const isSent = msg.fromSelf;
