@@ -1,43 +1,45 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Profile.module.css';
+import { saveProfile } from '../../utils/api';
 
 export default function StudyPreferences({ preferences }) {
-    const [showInterestInput, setShowInterestInput] = useState(false);
-    const [newInterest, setNewInterest] = useState('');
-    const [interests, setInterests] = useState(Array.isArray(preferences?.interests) ? preferences.interests : []);
+    const [editingEnv, setEditingEnv] = useState(false);
+    const [editingAvail, setEditingAvail] = useState(false);
+    const [availability, setAvailability] = useState(preferences.availability || '');
     const [environment, setEnvironment] = useState({
         onCampus: preferences.environment.onCampus,
         online: preferences.environment.online,
         groupSetting: preferences.environment.groupSetting,
         oneOnOne: preferences.environment.oneOnOne,
     });
+    const [interests, setInterests] = useState(Array.isArray(preferences?.interests) ? preferences.interests : []);
+    const [showInterestInput, setShowInterestInput] = useState(false);
+    const [newInterest, setNewInterest] = useState('');
+    const [loadingEnv, setLoadingEnv] = useState(false);
+    const [loadingAvail, setLoadingAvail] = useState(false);
+    const [errorEnv, setErrorEnv] = useState('');
+    const [errorAvail, setErrorAvail] = useState('');
 
-    const handleEdit = () => {
-        alert('Edit study preferences coming soon!');
+    // --- Availability ---
+    const handleEditAvail = () => {
+        alert('Editing availability will be introduced in a future update.');
     };
-
-    const handleAddInterestClick = () => {
-        setShowInterestInput(true);
+    // --- Environment ---
+    const handleEditEnv = () => {
+        alert('Editing study environment will be introduced in a future update.');
     };
-
+    // --- Interests (UI only) ---
+    const handleAddInterestClick = () => setShowInterestInput(true);
     const handleAddInterest = () => {
-        const trimmed = newInterest.trim();
-        if (trimmed && !interests.includes(trimmed)) {
-            setInterests([...interests, trimmed]);
-            setNewInterest('');
-            setShowInterestInput(false);
-        }
+        alert('Editing interests will be introduced in a future update.');
+        setShowInterestInput(false);
+        setNewInterest('');
     };
-
     const handleInputKeyDown = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
             handleAddInterest();
         }
-    };
-
-    const handleEnvChange = (key) => {
-        setEnvironment((prev) => ({ ...prev, [key]: !prev[key] }));
     };
 
     return (
@@ -46,9 +48,11 @@ export default function StudyPreferences({ preferences }) {
             <div className={styles.preferencesGrid}>
                 <div className={styles.preferenceSection}>
                     <h3>Study Availability</h3>
-                    {/* This would contain a time selector component */}
+                    <>
+                        <p>{availability}</p>
+                        <button className={styles.editButton} onClick={handleEditAvail}>Edit</button>
+                    </>
                 </div>
-
                 <div className={styles.preferenceSection}>
                     <h3>Study Environment</h3>
                     <div className={styles.checkboxItem}>
@@ -56,7 +60,7 @@ export default function StudyPreferences({ preferences }) {
                             type="checkbox"
                             id="campus"
                             checked={environment.onCampus}
-                            onChange={() => handleEnvChange('onCampus')}
+                            disabled={true}
                         />
                         <label htmlFor="campus">On Campus</label>
                     </div>
@@ -65,7 +69,7 @@ export default function StudyPreferences({ preferences }) {
                             type="checkbox"
                             id="online"
                             checked={environment.online}
-                            onChange={() => handleEnvChange('online')}
+                            disabled={true}
                         />
                         <label htmlFor="online">Online</label>
                     </div>
@@ -74,7 +78,7 @@ export default function StudyPreferences({ preferences }) {
                             type="checkbox"
                             id="group"
                             checked={environment.groupSetting}
-                            onChange={() => handleEnvChange('groupSetting')}
+                            disabled={true}
                         />
                         <label htmlFor="group">Group Setting</label>
                     </div>
@@ -83,13 +87,12 @@ export default function StudyPreferences({ preferences }) {
                             type="checkbox"
                             id="one-on-one"
                             checked={environment.oneOnOne}
-                            onChange={() => handleEnvChange('oneOnOne')}
+                            disabled={true}
                         />
                         <label htmlFor="one-on-one">One-on-One</label>
                     </div>
-                    <button className={styles.editButton} onClick={handleEdit}>Edit</button>
+                    <button className={styles.editButton} onClick={handleEditEnv}>Edit</button>
                 </div>
-
                 <div className={styles.preferenceSection}>
                     <h3>Study Interests</h3>
                     {Array.isArray(interests) &&
@@ -98,26 +101,8 @@ export default function StudyPreferences({ preferences }) {
                                 {interest}
                             </div>
                         ))}
-
                     <div className={styles.addMore}>
-                        {showInterestInput ? (
-                            <>
-                                <input
-                                    type="text"
-                                    value={newInterest}
-                                    onChange={e => setNewInterest(e.target.value)}
-                                    onKeyDown={handleInputKeyDown}
-                                    placeholder="Add interest"
-                                    autoFocus
-                                    style={{ marginRight: 8, borderRadius: 8, padding: '4px 10px', border: '1px solid #ccc' }}
-                                />
-                                <button onClick={handleAddInterest} style={{ borderRadius: 8, padding: '4px 12px', background: '#5c6bc0', color: 'white', border: 'none', fontWeight: 500 }}>
-                                    Add
-                                </button>
-                            </>
-                        ) : (
-                            <span style={{ cursor: 'pointer' }} onClick={handleAddInterestClick}>+ Add more interests</span>
-                        )}
+                        <span style={{ cursor: 'pointer' }} onClick={() => alert('Adding more interests will be introduced in a future update.')}>+ Add more interests</span>
                     </div>
                 </div>
             </div>

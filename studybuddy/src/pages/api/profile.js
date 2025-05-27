@@ -22,10 +22,14 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     const {
+      fullName,
+      university,
+      year,
+      field,
+      availability,
       academicYear,
       courses,
       studyPreferences,
-      availability,
       studyInterests,
       studyEnvironment,
     } = req.body;
@@ -35,10 +39,14 @@ export default async function handler(req, res) {
         { _id: new ObjectId(userId) },
         {
           $set: {
+            fullName,
+            university,
+            year,
+            field,
+            availability,
             academicYear,
             courses,
             studyPreferences,
-            availability,
             studyInterests,
             studyEnvironment,
             updatedAt: new Date(),
