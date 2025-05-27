@@ -43,6 +43,20 @@ export default function Step2StudyInfo({ next, back, data, update }) {
                 </select>
             </label>
 
+            <label>
+                Availability:
+                <select
+                    value={data.availability || ''}
+                    onChange={e => update({ availability: e.target.value })}
+                    required
+                >
+                    <option value="">Select availability</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                </select>
+            </label>
+
             <div className="form-nav">
                 <button type="button" onClick={back}>Back</button>
                 <button type="submit">Next</button>

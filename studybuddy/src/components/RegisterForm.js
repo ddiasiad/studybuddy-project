@@ -25,6 +25,13 @@ export default function RegistrationForm() {
     // Registration handler for final step
     const handleRegister = async () => {
         try {
+            // Ensure courses and interests are strings
+            const courses = Array.isArray(formData.courses)
+                ? formData.courses.join(',')
+                : formData.courses;
+            const interests = Array.isArray(formData.interests)
+                ? formData.interests.join(',')
+                : formData.interests;
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -35,9 +42,10 @@ export default function RegistrationForm() {
                     university: formData.university,
                     field: formData.field,
                     year: formData.year,
-                    courses: formData.courses,
-                    interests: formData.interests,
+                    courses,
+                    interests,
                     environment: formData.environment,
+                    availability: formData.availability,
                 }),
             });
             const data = await res.json();

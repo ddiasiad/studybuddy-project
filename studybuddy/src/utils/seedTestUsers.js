@@ -24,6 +24,8 @@ async function seed() {
         courses: 'Math,Physics',
         interests: 'AI,ML',
         environment: 'Online',
+        availability: 'Morning',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -35,6 +37,8 @@ async function seed() {
         courses: 'Chemistry,Biology',
         interests: 'Robotics,IoT',
         environment: 'On-Campus',
+        availability: 'Afternoon',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -46,6 +50,8 @@ async function seed() {
         courses: 'Algebra,Statistics',
         interests: 'Data Science,Math',
         environment: 'Group-Setting',
+        availability: 'Evening',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -57,6 +63,8 @@ async function seed() {
         courses: 'Physics,Math',
         interests: 'Quantum,Astro',
         environment: 'On-Campus',
+        availability: 'Morning',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -68,6 +76,8 @@ async function seed() {
         courses: 'Biology,Chemistry',
         interests: 'Genetics,Ecology',
         environment: 'Online',
+        availability: 'Afternoon',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -79,6 +89,8 @@ async function seed() {
         courses: 'Robotics,Math',
         interests: 'AI,Robotics',
         environment: 'Group-Setting',
+        availability: 'Evening',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -90,6 +102,8 @@ async function seed() {
         courses: 'Math,Programming',
         interests: 'ML,Programming',
         environment: 'Group-Setting',
+        availability: 'Morning',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -101,6 +115,8 @@ async function seed() {
         courses: 'Physics,Math',
         interests: 'Astro,Quantum',
         environment: 'Online',
+        availability: 'Afternoon',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -112,6 +128,8 @@ async function seed() {
         courses: 'Statistics,Algebra',
         interests: 'Math,Data Science',
         environment: 'On-Campus',
+        availability: 'Evening',
+        password: 'Password123',
         createdAt: new Date(),
       },
       {
@@ -123,6 +141,8 @@ async function seed() {
         courses: 'Robotics,Physics',
         interests: 'Robotics,AI',
         environment: 'Online',
+        availability: 'Morning',
+        password: 'Password123',
         createdAt: new Date(),
       },
     ];
@@ -131,7 +151,7 @@ async function seed() {
     const testUsers = await Promise.all(
       testUsersRaw.map(async user => ({
         ...user,
-        password: await bcrypt.hash('Password123', 10),
+        password: await bcrypt.hash(user.password, 10),
       })),
     );
 

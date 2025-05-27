@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   // All fields from the registration form
-  const { fullName, email, password, university, field, year, courses, interests, environment } = req.body;
+  const { fullName, email, password, university, field, year, courses, interests, environment, availability } = req.body;
 
   if (!fullName || !email || !password) {
     return res.status(400).json({ message: 'Missing required fields' });
@@ -38,6 +38,7 @@ export default async function handler(req, res) {
       courses: courses || '',
       interests: interests || '',
       environment: environment || '',
+      availability: availability || '',
       createdAt: new Date(),
     });
 

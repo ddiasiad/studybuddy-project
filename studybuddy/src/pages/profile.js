@@ -26,6 +26,8 @@ export default function Profile() {
                     name: user.fullName || user.name || 'Unknown',
                     university: user.university || '',
                     year: user.year || user.academicYear || '',
+                    field: user.field || '',
+                    availability: user.availability || '',
                     courses: Array.isArray(user.courses)
                         ? user.courses
                         : (user.courses ? user.courses.split(',').map(c => c.trim()) : []),
